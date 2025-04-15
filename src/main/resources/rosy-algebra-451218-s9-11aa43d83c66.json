@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "rosy-algebra-451218-s9",
+  "private_key_id": "11aa43d83c662d8a7d0318e011ea63e1b9bff8bf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDqyhn46A4hc16B\nUSi+ryaXAArNEWq+OXg3Fz/zogaekgFl3hwSQ7NBBUlBYHSGI8YImum9lTi1jE+3\nBNypJ6D7hDDPjGZEmzBtGupzehfLs3+ZTRc9Knf6YmZE9s+ahLKnOfCJsMg17haj\nxzpHkJkj+5j6lhBQ6+B2eq5NhVtNtJ9+TaB8QTt8h9DIJ21l+gtzjsrGshjwqUiU\nLp0N5/Bac444YDaJLDHG8J4EyL5+sf59lCpp8QHOk1dlPJZvn7Ibo3Q9EnthXwXm\nhOe8435r+sUgu76vLQ/ebR5FFXA2lwUKn7sTuzCWIlFArjfYmlmMkEtwutjhwzlD\niHb/9z7hAgMBAAECggEAAOxvzISoXl9RNUCeRwNY+B0XupWUwVABwtqEXBWWFK4B\nJwDU3jy5if1Wu9TnGgphlaUUwecokVl08tGOrXR3c9kIRbi8Q9oGB1fX9kGG5Txw\nH9unkyXSODNTSnaO4hrr7PzgW/PmRbgJcY/i3c2aAwQGJqFlsDvNTT0154SPxsiq\n+vSobstrmuvaO5VODqxegSWUs8yEvCtYZiFfoL2+nWetnFrxc/8hqu5DICYyJ1FE\nKJiPqB4I8Jn9Gnp6PbwgtHgCSGbuBolajM/TotVkuSsfwZn9RjitBqvblAHM+ANq\nUNkZA8ov1gRuPWfEMFEARNgDjEbBHMeRBSBiIUQ5cQKBgQD27ZBjAFLKz77ELAjx\nQXUyYvdDg/1ET0qj8vfOV+9eJKetar1W/YVTQgRgKTbo8/1DuteAC3oS3U3M/S2m\n4AuBjGiX1X4twOUXouiXlTH4AFEir6CtcpdOIDoXKvpQHWlJMjJHm4G+uy+uIbP9\nsbnvx8Hcea4d8Um2CbaJpnPVjQKBgQDzal7qN48cU44cEMLjcCkdd8fwV4n/cQd8\n1XlhkEN9AnbcM8Oib3cj9/vgGwCNiOYbOGPWYY0exQ3T0ro2QF3ubY2HMVkXinOw\nIqpdzIFOppnSLjr3myt075GDj+YfSj/ghjE2NnwmYbvEDbFYdL1GX2+1LlvJGxiY\nL31EFwbHpQKBgE1TabLHCCZA1kGCdK5wTC4iNcJr0+UPW5Vp4dY5TVlS6ztwQKi8\nLYM8Gjiuz2Y1+eq62P9dGLZNnS6DXkdyw8em254omiHj1RoIxwOpEgPSvZW6H/wQ\n9XbeurJEoCx0eWMVmA86kG/VGIJURZQ9kreW+4t6g18XD3k1I3eJq56FAoGAcL1p\nrK2C+Smx/km9Gj5OrLlXv3esEMW3JBhzmb6Jo5LKnn7TM57Q3bXz0P5wqR0pBp59\nj0Orav71wpAtcwco+k9/Z4hxrTeREZlcswkPMvBy+igzY49Y91YmXXr+qKtpHoLI\ntEVUByrpHosBAuk+6SM2yAHqvSBxqbsFF85ac4kCgYEAmGIhdlwikxv1WvhK2w33\n0odcum1ziLKpmXqHUgV09OE+sQ2LKRO+l5ROzFvjaV1qFcdDs6OVQvEhtnNeK8ws\nyhLB7+tNeauBEVW09+3E0WNRNZPbm+88DxgweEHqEvbQFh1IRpgTNWi6Z8HWTc8M\nkJq+cpD9zLX5SUgYnZNRivs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ticket-app@rosy-algebra-451218-s9.iam.gserviceaccount.com",
+  "client_id": "101606929997774325886",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ticket-app%40rosy-algebra-451218-s9.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
