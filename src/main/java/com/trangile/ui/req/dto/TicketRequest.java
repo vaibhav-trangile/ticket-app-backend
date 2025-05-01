@@ -8,6 +8,7 @@ public class TicketRequest {
 	private String description;
 	private Integer status;
 	private String environment;
+	private String priority;
 	private String supportType;
 	private String serviceType;
 	private String raisedBy;
@@ -20,13 +21,14 @@ public class TicketRequest {
 		
 	}
 
-	public TicketRequest(String project, String description, Integer status,
-			String environment, String supportType, String serviceType, String raisedBy, String summary,
-			String functionName, String subFunctionName, String createdBy) {
+	public TicketRequest(String project, String description, Integer status, String environment, String priority,
+			String supportType, String serviceType, String raisedBy, String summary, String functionName,
+			String subFunctionName, String createdBy) {
 		this.project = project;
 		this.description = description;
 		this.status = status;
 		this.environment = environment;
+		this.priority = priority;
 		this.supportType = supportType;
 		this.serviceType = serviceType;
 		this.raisedBy = raisedBy;
@@ -66,6 +68,14 @@ public class TicketRequest {
 
 	public void setEnvironment(String environment) {
 		this.environment = environment;
+	}
+
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 
 	public String getSupportType() {
@@ -126,7 +136,7 @@ public class TicketRequest {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(createdBy, description, environment, functionName, project, raisedBy, serviceType,
+		return Objects.hash(createdBy, description, environment, functionName, priority, project, raisedBy, serviceType,
 				status, subFunctionName, summary, supportType);
 	}
 
@@ -141,18 +151,17 @@ public class TicketRequest {
 		TicketRequest other = (TicketRequest) obj;
 		return Objects.equals(createdBy, other.createdBy) && Objects.equals(description, other.description)
 				&& Objects.equals(environment, other.environment) && Objects.equals(functionName, other.functionName)
-				&& Objects.equals(project, other.project) && Objects.equals(raisedBy, other.raisedBy)
-				&& Objects.equals(serviceType, other.serviceType)
-				&& Objects.equals(status, other.status)
-				&& Objects.equals(subFunctionName, other.subFunctionName) && Objects.equals(summary, other.summary)
-				&& Objects.equals(supportType, other.supportType);
+				&& Objects.equals(priority, other.priority) && Objects.equals(project, other.project)
+				&& Objects.equals(raisedBy, other.raisedBy) && Objects.equals(serviceType, other.serviceType)
+				&& Objects.equals(status, other.status) && Objects.equals(subFunctionName, other.subFunctionName)
+				&& Objects.equals(summary, other.summary) && Objects.equals(supportType, other.supportType);
 	}
 
 	@Override
 	public String toString() {
 		return "TicketRequest [project=" + project + ", description=" + description + ", status=" + status
-				+ ", environment=" + environment + ", supportType=" + supportType + ", serviceType=" + serviceType
-				+ ", raisedBy=" + raisedBy + ", summary=" + summary + ", functionName=" + functionName
-				+ ", subFunctionName=" + subFunctionName + ", createdBy=" + createdBy + "]";
+				+ ", environment=" + environment + ", priority=" + priority + ", supportType=" + supportType
+				+ ", serviceType=" + serviceType + ", raisedBy=" + raisedBy + ", summary=" + summary + ", functionName="
+				+ functionName + ", subFunctionName=" + subFunctionName + ", createdBy=" + createdBy + "]";
 	}
 }

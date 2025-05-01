@@ -61,6 +61,9 @@ public class Tickets {
 	@Column(name = "SUPPORTTYPE")
 	private String supportType;
 	
+	@Column(name = "PRIORITY")
+	private String priority;
+	
 	@Column(name = "SERVICETYPE")
 	private String serviceType;
 	
@@ -109,10 +112,10 @@ public class Tickets {
 
 	public Tickets(String ticketId, String project, String description, String status, String remarks,
 			LocalDateTime issueRaisedOn, String raisedBy, LocalDateTime assignedOn, String assignedTo,
-			LocalDateTime resolvedOn, String resolvedBy, String environment, String supportType, String serviceType,
-			String summary, String functionName, String subFunctionName, Long resolutionTimeTakenInMin,
-			Long assignedTimeTakenInMin, Long actualTimeTakenInMin, String monthYear, LocalDateTime createdOn,
-			String createdBy, LocalDateTime updatedOn, String updatedBy) {
+			LocalDateTime resolvedOn, String resolvedBy, String environment, String supportType, String priority,
+			String serviceType, String summary, String functionName, String subFunctionName,
+			Long resolutionTimeTakenInMin, Long assignedTimeTakenInMin, Long actualTimeTakenInMin, String monthYear,
+			LocalDateTime createdOn, String createdBy, LocalDateTime updatedOn, String updatedBy) {
 		this.ticketId = ticketId;
 		this.project = project;
 		this.description = description;
@@ -126,6 +129,7 @@ public class Tickets {
 		this.resolvedBy = resolvedBy;
 		this.environment = environment;
 		this.supportType = supportType;
+		this.priority = priority;
 		this.serviceType = serviceType;
 		this.summary = summary;
 		this.functionName = functionName;
@@ -298,6 +302,18 @@ public class Tickets {
 
 
 
+	public String getPriority() {
+		return priority;
+	}
+
+
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+
+
+
 	public String getServiceType() {
 		return serviceType;
 	}
@@ -445,7 +461,7 @@ public class Tickets {
 	@Override
 	public int hashCode() {
 		return Objects.hash(actualTimeTakenInMin, assignedOn, assignedTimeTakenInMin, assignedTo, createdBy, createdOn,
-				description, environment, functionName, issueRaisedOn, monthYear, project, raisedBy, remarks,
+				description, environment, functionName, issueRaisedOn, monthYear, priority, project, raisedBy, remarks,
 				resolutionTimeTakenInMin, resolvedBy, resolvedOn, serviceType, status, subFunctionName, summary,
 				supportType, ticketId, updatedBy, updatedOn);
 	}
@@ -468,8 +484,8 @@ public class Tickets {
 				&& Objects.equals(createdOn, other.createdOn) && Objects.equals(description, other.description)
 				&& Objects.equals(environment, other.environment) && Objects.equals(functionName, other.functionName)
 				&& Objects.equals(issueRaisedOn, other.issueRaisedOn) && Objects.equals(monthYear, other.monthYear)
-				&& Objects.equals(project, other.project) && Objects.equals(raisedBy, other.raisedBy)
-				&& Objects.equals(remarks, other.remarks)
+				&& Objects.equals(priority, other.priority) && Objects.equals(project, other.project)
+				&& Objects.equals(raisedBy, other.raisedBy) && Objects.equals(remarks, other.remarks)
 				&& Objects.equals(resolutionTimeTakenInMin, other.resolutionTimeTakenInMin)
 				&& Objects.equals(resolvedBy, other.resolvedBy) && Objects.equals(resolvedOn, other.resolvedOn)
 				&& Objects.equals(serviceType, other.serviceType) && Objects.equals(status, other.status)
@@ -486,10 +502,11 @@ public class Tickets {
 				+ status + ", remarks=" + remarks + ", issueRaisedOn=" + issueRaisedOn + ", raisedBy=" + raisedBy
 				+ ", assignedOn=" + assignedOn + ", assignedTo=" + assignedTo + ", resolvedOn=" + resolvedOn
 				+ ", resolvedBy=" + resolvedBy + ", environment=" + environment + ", supportType=" + supportType
-				+ ", serviceType=" + serviceType + ", summary=" + summary + ", functionName=" + functionName
-				+ ", subFunctionName=" + subFunctionName + ", resolutionTimeTakenInMin=" + resolutionTimeTakenInMin
-				+ ", assignedTimeTakenInMin=" + assignedTimeTakenInMin + ", actualTimeTakenInMin="
-				+ actualTimeTakenInMin + ", monthYear=" + monthYear + ", createdOn=" + createdOn + ", createdBy="
-				+ createdBy + ", updatedOn=" + updatedOn + ", updatedBy=" + updatedBy + "]";
+				+ ", priority=" + priority + ", serviceType=" + serviceType + ", summary=" + summary + ", functionName="
+				+ functionName + ", subFunctionName=" + subFunctionName + ", resolutionTimeTakenInMin="
+				+ resolutionTimeTakenInMin + ", assignedTimeTakenInMin=" + assignedTimeTakenInMin
+				+ ", actualTimeTakenInMin=" + actualTimeTakenInMin + ", monthYear=" + monthYear + ", createdOn="
+				+ createdOn + ", createdBy=" + createdBy + ", updatedOn=" + updatedOn + ", updatedBy=" + updatedBy
+				+ "]";
 	}
 }
