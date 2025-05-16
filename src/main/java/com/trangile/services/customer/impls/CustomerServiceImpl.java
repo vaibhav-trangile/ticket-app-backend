@@ -56,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService{
 		List<Customer> allCustomers = repo.findAll();
 		return  allCustomers.stream().map(c -> {
 			CustomerResponse response = new CustomerResponse();
+			response.setCustomerId(c.getCustomerId());
 			response.setCustomerName(c.getCustomerName());
 			response.setCustomerPhone(c.getCustomerPhone());
 			response.setCustomerEmail(c.getCustomerEmail());

@@ -11,10 +11,11 @@ public interface AppConstants {
 	String BACKEND_API_URI = "/custservice";
 	String CREATE_INCIDENT_URI = "/create";
 	String GET_INCIDENT_URI = "/incident";
-	String ALL_INCIDENT_URI = "/allincidents";
-	String ALL_NEW_INCIDENT_URI = "/allincidents/new";
-	String ALL_PENDING_INCIDENT_URI = "/allincidents/pending";
-	String ALL_CLOSED_INCIDENT_URI = "/allincidents/closed";
+	String ALL_INCIDENT_URI = "/all";
+	String ALL_NEW_INCIDENT_URI = "/new";
+	String ALL_PENDING_INCIDENT_URI = "/pending";
+	String ALL_RESOLVED_INCIDENT_URI = "/resolved";
+	String ALL_CLOSED_INCIDENT_URI = "/closed";
 	String ROLE_STRING = "ROLE_";
 	String ASSIGNEE_URI = "assign";
 	String RESPONSE_MESSAGE = "Data retrieved successfully.";

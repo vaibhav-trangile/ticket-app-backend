@@ -1,4 +1,4 @@
-package com.trangile.config;
+package com.trangile.configs;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

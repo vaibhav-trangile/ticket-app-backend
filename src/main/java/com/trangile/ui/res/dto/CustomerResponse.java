@@ -4,7 +4,9 @@ import java.util.Objects;
 
 public class CustomerResponse {
 	
-private String customerName;
+	private Long customerId;
+
+	private String customerName;
 	
 	private String customerAdd;
 	
@@ -25,6 +27,14 @@ private String customerName;
 		this.customerPhone = customerPhone;
 		this.customerEmail = customerEmail;
 		this.customerNumber = customerNumber;
+	}
+	
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getCustomerName() {

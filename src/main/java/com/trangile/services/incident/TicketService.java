@@ -18,6 +18,8 @@ public interface TicketService {
 	Optional<Tickets> save(TicketRequest req, List<MultipartFile> files);
 
 	Optional<List <Tickets>> getTickets(String project);
+	
+	Optional<List<Tickets>> getTicketsWithParameter(String project, String params);
 
 	Optional<List<Tickets>> getNewTickets(String project);
 

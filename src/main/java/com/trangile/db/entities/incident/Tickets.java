@@ -6,17 +6,13 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.trangile.db.entities.listeners.TicketGeneratorListener;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "TICKETSDETAILS")
-@EntityListeners(TicketGeneratorListener.class)
 public class Tickets {
 	
 	@Id

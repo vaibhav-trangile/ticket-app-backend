@@ -2,6 +2,7 @@ package com.trangile.services.incident.impl;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.trangile.db.entities.incident.Tickets;
 import com.trangile.db.repo.incident.TicketRepo;
 import com.trangile.services.event.EventService;
+import com.trangile.services.incident.IdGeneratorService;
 import com.trangile.services.incident.TicketService;
 import com.trangile.ui.req.dto.TicketRequest;
 import com.trangile.ui.req.dto.TicketStatusChangeDto;
@@ -31,6 +33,9 @@ public class TicketServiceImpl implements TicketService {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private IdGeneratorService idService;
 
 	@Override
 	public Optional<TicketDashboardResponse> getDashboardData(String project) {
@@ -40,13 +45,15 @@ public class TicketServiceImpl implements TicketService {
             long newCount = ticketRepo.countByProjectAndStatus(project, "0");
             long pendingCount = ticketRepo.countByProjectAndStatusIn(project, new String[]{"5", "7"});
             long closedCount = ticketRepo.countByProjectAndStatus(project, "9");
-            trd = new TicketDashboardResponse(totalCount, newCount, pendingCount, closedCount);
+            long resolvedCount = ticketRepo.countByProjectAndStatus(project, "8");
+            trd = new TicketDashboardResponse(totalCount, newCount, pendingCount, resolvedCount,closedCount);
 		} else {
 			long totalCount = ticketRepo.count();
             long newCount = ticketRepo.countByStatus("0");
             long pendingCount = ticketRepo.countByStatusIn(new String[]{"5", "7"});
             long closedCount = ticketRepo.countByStatus("9");
-            trd = new TicketDashboardResponse(totalCount, newCount, pendingCount, closedCount);
+            long resolvedCount = ticketRepo.countByStatus("8");
+            trd = new TicketDashboardResponse(totalCount, newCount, pendingCount, resolvedCount, closedCount);
 		}
 		return Optional.ofNullable(trd);
 	}
@@ -55,6 +62,8 @@ public class TicketServiceImpl implements TicketService {
 	public Optional<Tickets> save(TicketRequest req, List<MultipartFile> files) {
 		Tickets ticket = new Tickets();
 		BeanUtils.copyProperties(req, ticket);
+//		String generatedId = ;
+		ticket.setTicketId(idService.generateId());
 		ticket.setStatus(String.valueOf(req.getStatus()));
 		LocalDateTime ticketDate = LocalDateTime.now();
 		ticket.setIssueRaisedOn(ticketDate);
@@ -102,15 +111,31 @@ public class TicketServiceImpl implements TicketService {
 		}
 		return Optional.empty();
 	}
+	
+	
+	
+	@Override
+	public Optional<List<Tickets>> getTicketsWithParameter(String project, String param) {
+		List<Tickets> newTickets = new ArrayList<>();
+		if(project != null && !project.isEmpty()) {
+			newTickets = ticketRepo.findByProjectAndStatusOrderByCreatedOnDesc(project, param);
+		} else {
+			newTickets = ticketRepo.findAllByStatus(param);
+		}
+		if (newTickets.size() > 0) {
+			return Optional.ofNullable(newTickets);
+		}
+		return Optional.empty();
+	}
 
 	
 	@Override
 	public Optional<List<Tickets>> getNewTickets(String project) {
-		List<Tickets> newTickets;
+		List<Tickets> newTickets = new ArrayList<>();
 		if(project != null && !project.isEmpty()) {
 			newTickets = ticketRepo.findByProjectAndStatusOrderByCreatedOnDesc(project, "0");
 		} else {
-			newTickets = ticketRepo.findByStatus("0");
+			newTickets = ticketRepo.findAllByStatus("0");
 		}
 		if (newTickets.size() > 0) {
 			return Optional.ofNullable(newTickets);
@@ -120,7 +145,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Optional<List<Tickets>> getPendingTickets(String project) {
-		List<Tickets> pendingTickets;
+		List<Tickets> pendingTickets = new ArrayList<>();
 		if(project != null && !project.isEmpty()) {
 			pendingTickets = ticketRepo.findByProjectAndStatusInOrderByCreatedOnDesc(project, new String[] {"5", "7"});
 		} else {
@@ -134,11 +159,11 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Optional<List<Tickets>> getClosedTickets(String project) {
-		List<Tickets> closedTickets;
+		List<Tickets> closedTickets = new ArrayList<>();
 		if (project != null && !project.isEmpty()) {
 			closedTickets = ticketRepo.findByProjectAndStatusOrderByCreatedOnDesc(project, "9");
 		} else {
-			closedTickets = ticketRepo.findByStatus("9");
+			closedTickets = ticketRepo.findAllByStatus("9");
 		}
 		if (closedTickets.size() > 0) {
 			return Optional.ofNullable(closedTickets);

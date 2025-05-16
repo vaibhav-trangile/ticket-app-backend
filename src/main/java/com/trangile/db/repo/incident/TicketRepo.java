@@ -21,8 +21,8 @@ public interface TicketRepo extends JpaRepository<Tickets, Serializable>{
     @Query("SELECT COUNT(t) FROM Tickets t WHERE YEAR(t.createdOn) = :year")
     int getYearlyRecordCount(@Param("year") int year);
     
-	
-	public List<Tickets> findByStatus(String status);
+    @Query("SELECT t FROM Tickets t WHERE t.status = :status")
+	public List<Tickets> findAllByStatus(String status);
 	
 	List<Tickets> findByStatusInOrderByCreatedOnDesc(String[] statuses);
 	List<Tickets> findByProjectOrderByCreatedOnDesc(String project);

@@ -102,7 +102,7 @@ public class TicketController {
 	
 	@GetMapping(AppConstants.ALL_NEW_INCIDENT_URI)
 	public ResponseEntity<ApiResponse<Object>> getAllNewIncidents(@RequestParam(name = "project", required = false) String project) {
-		Optional<List <Tickets>> ticket= ticketService.getNewTickets(project);
+		Optional<List <Tickets>> ticket= ticketService.getTicketsWithParameter(project, "0");
 		 if(ticket.isPresent()) {
 			 ApiResponse<Object> response = new ApiResponse<Object>();
 			 response.setData(ticket);
@@ -113,7 +113,20 @@ public class TicketController {
 	
 	@GetMapping(AppConstants.ALL_PENDING_INCIDENT_URI)
 	public ResponseEntity<ApiResponse<Object>> getAllPendingIncidents(@RequestParam(name = "project", required = false) String project) {
-		Optional<List <Tickets>> ticket= ticketService.getPendingTickets(project);
+//		Optional<List <Tickets>> ticket= ticketService.getPendingTickets(project);
+		Optional<List <Tickets>> ticket= ticketService.getTicketsWithParameter(project, "5");
+		 if(ticket.isPresent()) {
+			 ApiResponse<Object> response = new ApiResponse<Object>();
+			 response.setData(ticket);
+			 return new ResponseEntity<ApiResponse<Object>> (response, HttpStatus.OK);
+		 }
+		 return new ResponseEntity<>(null, HttpStatus. BAD_REQUEST);
+	}
+	
+	@GetMapping(AppConstants.ALL_RESOLVED_INCIDENT_URI)
+	public ResponseEntity<ApiResponse<Object>> getAllResolvedIncidents(@RequestParam(name = "project", required = false) String project) {
+//		Optional<List <Tickets>> ticket= ticketService.getPendingTickets(project);
+		Optional<List <Tickets>> ticket= ticketService.getTicketsWithParameter(project, "8");
 		 if(ticket.isPresent()) {
 			 ApiResponse<Object> response = new ApiResponse<Object>();
 			 response.setData(ticket);
@@ -124,7 +137,8 @@ public class TicketController {
 	
 	@GetMapping(AppConstants.ALL_CLOSED_INCIDENT_URI)
 	public ResponseEntity<ApiResponse<Object>> getAllClosedIncidents(@RequestParam(name = "project", required = false) String project) {
-		Optional<List <Tickets>> ticket= ticketService.getClosedTickets(project);
+//		Optional<List <Tickets>> ticket= ticketService.getClosedTickets(project);
+		Optional<List <Tickets>> ticket= ticketService.getTicketsWithParameter(project, "9");
 		 if(ticket.isPresent()) {
 			 ApiResponse<Object> response = new ApiResponse<Object>();
 			 response.setData(ticket);
