@@ -14,7 +14,11 @@ public interface CustomerService {
 	List<CustomerResponse> getAllCustomer();
 
 	List<String> getAllCustomerNames();
+	
+	CustomerResponse getCustomer(Long custId);
 
-	String deleteCustomer(String name);
+	String deleteCustomer(Long custId);
+
+	CustomerResponse updateCustomer(Long custId, CustomerRequest req);
 
 }

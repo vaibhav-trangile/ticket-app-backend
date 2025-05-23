@@ -14,21 +14,37 @@ public class CustomerResponse {
 	
 	private String customerEmail;
 	
-	private String customerNumber;
+	private String customerDomain;
+	
+	private Character isActive;
+	
+	private Character isDeleted;
 
 	public CustomerResponse() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public CustomerResponse(String customerName, String customerAdd, String customerPhone, String customerEmail,
-			String customerNumber) {
+	public CustomerResponse(String customerName, String customerEmail, String customerPhone, String customerAdd,
+			String customerDomain) {
 		this.customerName = customerName;
 		this.customerAdd = customerAdd;
 		this.customerPhone = customerPhone;
 		this.customerEmail = customerEmail;
-		this.customerNumber = customerNumber;
+		this.customerDomain = customerDomain;
 	}
-	
+
+	public CustomerResponse(Long customerId, String customerName, String customerAdd, String customerPhone,
+			String customerEmail, String customerDomain, Character isActive, Character isDeleted) {
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.customerAdd = customerAdd;
+		this.customerPhone = customerPhone;
+		this.customerEmail = customerEmail;
+		this.customerDomain = customerDomain;
+		this.isActive = isActive;
+		this.isDeleted = isDeleted;
+	}
+
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -69,17 +85,34 @@ public class CustomerResponse {
 		this.customerEmail = customerEmail;
 	}
 
-	public String getCustomerNumber() {
-		return customerNumber;
+	public String getCustomerDomain() {
+		return customerDomain;
 	}
 
-	public void setCustomerNumber(String customerNumber) {
-		this.customerNumber = customerNumber;
+	public void setCustomerDomain(String customerDomain) {
+		this.customerDomain = customerDomain;
+	}
+
+	public Character getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Character isActive) {
+		this.isActive = isActive;
+	}
+
+	public Character getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Character isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(customerAdd, customerEmail, customerName, customerNumber, customerPhone);
+		return Objects.hash(customerAdd, customerDomain, customerEmail, customerId, customerName, customerPhone,
+				isActive, isDeleted);
 	}
 
 	@Override
@@ -91,16 +124,17 @@ public class CustomerResponse {
 		if (getClass() != obj.getClass())
 			return false;
 		CustomerResponse other = (CustomerResponse) obj;
-		return Objects.equals(customerAdd, other.customerAdd) && Objects.equals(customerEmail, other.customerEmail)
+		return Objects.equals(customerAdd, other.customerAdd) && Objects.equals(customerDomain, other.customerDomain)
+				&& Objects.equals(customerEmail, other.customerEmail) && Objects.equals(customerId, other.customerId)
 				&& Objects.equals(customerName, other.customerName)
-				&& Objects.equals(customerNumber, other.customerNumber)
-				&& Objects.equals(customerPhone, other.customerPhone);
+				&& Objects.equals(customerPhone, other.customerPhone) && Objects.equals(isActive, other.isActive)
+				&& Objects.equals(isDeleted, other.isDeleted);
 	}
 
 	@Override
 	public String toString() {
-		return "CustomerResponse [customerName=" + customerName + ", customerAdd=" + customerAdd + ", customerPhone="
-				+ customerPhone + ", customerEmail=" + customerEmail + ", customerNumber=" + customerNumber + "]";
-	}
-
+		return "CustomerResponse [customerId=" + customerId + ", customerName=" + customerName + ", customerAdd="
+				+ customerAdd + ", customerPhone=" + customerPhone + ", customerEmail=" + customerEmail
+				+ ", customerDomain=" + customerDomain + ", isActive=" + isActive + ", isDeleted=" + isDeleted + "]";
+	}	
 }

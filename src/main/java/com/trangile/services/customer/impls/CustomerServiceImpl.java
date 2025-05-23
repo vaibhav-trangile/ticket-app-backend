@@ -2,8 +2,10 @@ package com.trangile.services.customer.impls;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +63,9 @@ public class CustomerServiceImpl implements CustomerService{
 			response.setCustomerPhone(c.getCustomerPhone());
 			response.setCustomerEmail(c.getCustomerEmail());
 			response.setCustomerAdd(c.getCustomerAdd());
+			response.setCustomerDomain(c.getCustomerDomain());
+			response.setIsActive(c.getIsActive());
+			response.setIsDeleted(c.getIsDeleted());
 			return response;
 		}).collect(Collectors.toList());
 	}
@@ -71,7 +76,41 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public String deleteCustomer(String name) {
+	public String deleteCustomer(Long custId) {
+		Optional<Customer> byId = repo.findById(custId);
+		if (byId.isPresent()) {
+			Customer customer = byId.get();
+			customer.setIsDeleted('Y');
+			repo.save(customer);
+			return "Deletion done successfully.";
+		}
+		return null;
+	}
+
+	@Override
+	public CustomerResponse getCustomer(Long custId) {
+		Optional<Customer> byId = repo.findById(custId);
+		if (byId.isPresent()) {
+			CustomerResponse reponse = new CustomerResponse();
+			BeanUtils.copyProperties(byId.get(), reponse);
+			return reponse;
+		}
+		return null;
+	}
+
+	@Override
+	public CustomerResponse updateCustomer(Long custId, CustomerRequest req) {
+		Optional<Customer> byId = repo.findById(custId);
+		if (byId.isPresent()) {
+			Customer customer = byId.get();
+			BeanUtils.copyProperties(req, customer);
+			Customer save = repo.save(customer);
+			CustomerResponse reponse = new CustomerResponse();
+			BeanUtils.copyProperties(save, reponse);
+			return reponse;
+		}
+		
+		
 		return null;
 	}
 	
