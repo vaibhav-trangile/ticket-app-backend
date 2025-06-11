@@ -1,42 +1,38 @@
 package com.trangile.ui.res.dto;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
 
-import com.trangile.util.AppConstants;
+
 
 public class ApiResponse <T> {
 	
 	private Integer code;
 	private boolean success;
+	private LocalDateTime time;
 	private String message;
 	private T data;
 	private ErrorDetails errorDetails;
 	
 	public ApiResponse() {
-		this.code = 200;
+		this.code = HttpStatus.OK.value();
 		this.success = true;
-		this.message = AppConstants.RESPONSE_MESSAGE;
-		
+		this.time = LocalDateTime.now();
 	}
 
-	public ApiResponse(Integer code, boolean success, String message, T data, ErrorDetails errorDetails) {
+
+	public ApiResponse(Integer code, boolean success, LocalDateTime time, String message, T data,
+			ErrorDetails errorDetails) {
 		this.code = code;
 		this.success = success;
+		this.time = time;
 		this.message = message;
 		this.data = data;
 		this.errorDetails = errorDetails;
 	}
 	
-	public ApiResponse(boolean success, String message, T data, ErrorDetails errorDetails) {
-		this.code = HttpStatus.INTERNAL_SERVER_ERROR.value();
-		this.success = success;
-		this.message = message;
-		this.data = data;
-		this.errorDetails = errorDetails;
-	}
-
 	public Integer getCode() {
 		return code;
 	}
@@ -51,6 +47,14 @@ public class ApiResponse <T> {
 
 	public void setSuccess(boolean success) {
 		this.success = success;
+	}
+
+	public LocalDateTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalDateTime time) {
+		this.time = time;
 	}
 
 	public String getMessage() {
@@ -76,10 +80,14 @@ public class ApiResponse <T> {
 	public void setErrorDetails(ErrorDetails errorDetails) {
 		this.errorDetails = errorDetails;
 	}
+	
+	
+
+
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(code, data, errorDetails, message, success);
+		return Objects.hash(code, data, errorDetails, message, success, time);
 	}
 
 	@Override
@@ -93,15 +101,14 @@ public class ApiResponse <T> {
 		ApiResponse other = (ApiResponse) obj;
 		return Objects.equals(code, other.code) && Objects.equals(data, other.data)
 				&& Objects.equals(errorDetails, other.errorDetails) && Objects.equals(message, other.message)
-				&& success == other.success;
+				&& success == other.success && Objects.equals(time, other.time);
 	}
 
 	@Override
 	public String toString() {
-		return "ApiResponse [code=" + code + ", success=" + success + ", message=" + message + ", data=" + data
-				+ ", errorDetails=" + errorDetails + "]";
+		return "ApiResponse [code=" + code + ", success=" + success + ", time=" + time + ", message=" + message
+				+ ", data=" + data + ", errorDetails=" + errorDetails + "]";
 	}
-
 
 	public static class ErrorDetails {
 		private String errorCode;
@@ -166,5 +173,7 @@ public class ApiResponse <T> {
 		}
 		
 	}
+
+
 	
 }

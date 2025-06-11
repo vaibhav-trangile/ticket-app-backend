@@ -1,4 +1,4 @@
-package com.trangile.ui.controller.incident;
+package com.trangile.ui.controllers.incident;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,7 +42,7 @@ public class TicketController {
 	public ResponseEntity<ApiResponse<Object>> getDashboardData(@RequestParam(name = "project", required = false) String project) {
 		Optional<TicketDashboardResponse> ticket= ticketService.getDashboardData(project);
 		 if(ticket.isPresent()) {
-			 ApiResponse<Object> response = new ApiResponse<>(HttpStatus.OK.value(), true, "Data retrieved successfully", ticket.get(), null);
+			 ApiResponse<Object> response = new ApiResponse<>(HttpStatus.OK.value(), true, LocalDateTime.now(), "Data retrieved successfully", ticket.get(), null);
 			 return new ResponseEntity<>(response, HttpStatus.OK);
 		 }
 		 return new ResponseEntity<>(null, HttpStatus. BAD_REQUEST);
@@ -93,7 +93,8 @@ public class TicketController {
 	public ResponseEntity<ApiResponse<Object>> getAllIncidents(@RequestParam(name = "project", required = false) String project) {
 		Optional<List <Tickets>> ticket= ticketService.getTickets(project);
 		 if(ticket.isPresent()) {
-			 ApiResponse<Object> response = new ApiResponse<Object>();
+			 ApiResponse<Object> response = new ApiResponse();
+			 response.setMessage("Data retrieved successfully.");
 			 response.setData(ticket);
 			 return new ResponseEntity<ApiResponse<Object>> (response, HttpStatus.OK);
 		 }
@@ -105,6 +106,7 @@ public class TicketController {
 		Optional<List <Tickets>> ticket= ticketService.getTicketsWithParameter(project, "0");
 		 if(ticket.isPresent()) {
 			 ApiResponse<Object> response = new ApiResponse<Object>();
+			 response.setMessage("Data retrieved successfully.");
 			 response.setData(ticket);
 			 return new ResponseEntity<ApiResponse<Object>> (response, HttpStatus.OK);
 		 }
@@ -117,6 +119,7 @@ public class TicketController {
 		Optional<List <Tickets>> ticket= ticketService.getTicketsWithParameter(project, "5");
 		 if(ticket.isPresent()) {
 			 ApiResponse<Object> response = new ApiResponse<Object>();
+			 response.setMessage("Data retrieved successfully.");
 			 response.setData(ticket);
 			 return new ResponseEntity<ApiResponse<Object>> (response, HttpStatus.OK);
 		 }
@@ -129,6 +132,7 @@ public class TicketController {
 		Optional<List <Tickets>> ticket= ticketService.getTicketsWithParameter(project, "8");
 		 if(ticket.isPresent()) {
 			 ApiResponse<Object> response = new ApiResponse<Object>();
+			 response.setMessage("Data retrieved successfully.");
 			 response.setData(ticket);
 			 return new ResponseEntity<ApiResponse<Object>> (response, HttpStatus.OK);
 		 }
@@ -141,6 +145,7 @@ public class TicketController {
 		Optional<List <Tickets>> ticket= ticketService.getTicketsWithParameter(project, "9");
 		 if(ticket.isPresent()) {
 			 ApiResponse<Object> response = new ApiResponse<Object>();
+			 response.setMessage("Data retrieved successfully.");
 			 response.setData(ticket);
 			 return new ResponseEntity<ApiResponse<Object>> (response, HttpStatus.OK);
 		 }

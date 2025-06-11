@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +38,7 @@ public class TicketEventController {
 		System.out.println("Calling saveEventData() recieved at: "+ LocalDateTime.now()+"\nData: " +req);
 		Optional<Ticket_Event_Res_Dto> createdEvent= eventService.saveEvents(req, files);
 		 if(createdEvent.isPresent()) {
-			 ApiResponse<Object> response = new ApiResponse<>(HttpStatus.OK.value(), true, "Data retrieved successfully", createdEvent.get(), null);
+			 ApiResponse<Object> response = new ApiResponse<>(HttpStatus.OK.value(), true, LocalDateTime.now(), "Data retrieved successfully", createdEvent.get(), null);
 			 return new ResponseEntity<>(response, HttpStatus.OK);
 		 }
 		 return new ResponseEntity<>(null, HttpStatus. BAD_REQUEST);
@@ -50,7 +49,7 @@ public class TicketEventController {
 	public ResponseEntity<ApiResponse<Object>> getEvents(@PathVariable String ticketId) {
 		Optional<Ticket_Event_Res_Dto> event= eventService.getAllEvents(ticketId);
 		 if(event.isPresent()) {
-			 ApiResponse<Object> response = new ApiResponse<>(HttpStatus.OK.value(), true, "Data retrieved successfully", event.get(), null);
+			 ApiResponse<Object> response = new ApiResponse<>(HttpStatus.OK.value(), true, LocalDateTime.now(),"Data retrieved successfully", event.get(), null);
 			 return new ResponseEntity<>(response, HttpStatus.OK);
 		 }
 		 return new ResponseEntity<>(null, HttpStatus. BAD_REQUEST);

@@ -4,7 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public interface AppConstants {
+	
 	String CORS_URI = "http://localhost:4000";
+	String BACKEND_BASE_URI = "/trangile/api/support/v1";
+	String BACKEND_USER_API_URI = "/reg/userauth";
+	String USER_API_URI = "/userdetail";	
 	String BASE_URI = "/trangile/api/support/v1";
 	String API_URI = "/incidents";
 	String DASHBORAD_URI = "/dashboard";

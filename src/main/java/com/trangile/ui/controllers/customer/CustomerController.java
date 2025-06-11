@@ -1,5 +1,6 @@
 package com.trangile.ui.controllers.customer;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,10 @@ public class CustomerController {
 	@GetMapping(value = "/customers")
 	public ResponseEntity<ApiResponse<Object>> createCustomer() {
 		ApiResponse<Object> api = new ApiResponse<>();
+		api.setCode(HttpStatus.OK.value());
+		api.setSuccess(true);
+		api.setMessage("Customer retrieved successfully.");
+		api.setTime(LocalDateTime.now());
 		api.setData(customerService.getAllCustomer());
 		return new ResponseEntity<>(api, HttpStatus.OK);
 	}

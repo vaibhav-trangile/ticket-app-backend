@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import com.trangile.db.entities.customer.Customer;
 import com.trangile.db.repo.customer.CustomerRepository;
 import com.trangile.services.customer.CustomerService;
+import com.trangile.services.users.UserService;
 import com.trangile.ui.req.dto.CustomerRequest;
+import com.trangile.ui.req.dto.UserDto;
 import com.trangile.ui.res.dto.CustomerResponse;
 
 @Service
@@ -21,6 +23,9 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	private CustomerRepository repo;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Override
 	public String createCustomer(CustomerRequest request) {
@@ -34,7 +39,21 @@ public class CustomerServiceImpl implements CustomerService{
 		customer.setIsDeleted('N');
 		customer.setCreatedBy(request.getCreatedBy());
 		Customer save = repo.save(customer);
+		createUser(save);
 		return (save.getCustomerId() != null & save.getCustomerId() != 0) ? "Customer Created." : "Something went wrong.";
+	}
+
+	private void createUser(Customer save) {
+		UserDto dto = new UserDto();
+		String valueOfUserName = String.valueOf(save.getCustomerId());
+		dto.setUserName(valueOfUserName);
+		dto.setEmail(save.getCustomerEmail());
+		dto.setFullName(save.getCustomerName());
+		dto.setPassword(valueOfUserName + "@#123");
+		dto.setCreatedBy(save.getCreatedBy());
+		dto.setIsActive(save.getIsActive() == 'Y' ? true : false);
+		dto.setRoles(List.of("CUSTOMER"));
+		userService.createUser(dto);
 	}
 
 	@Override
@@ -81,6 +100,8 @@ public class CustomerServiceImpl implements CustomerService{
 		if (byId.isPresent()) {
 			Customer customer = byId.get();
 			customer.setIsDeleted('Y');
+			customer.setIsActive('N');
+			userService.deleteUser(String.valueOf(custId));
 			repo.save(customer);
 			return "Deletion done successfully.";
 		}
@@ -109,8 +130,6 @@ public class CustomerServiceImpl implements CustomerService{
 			BeanUtils.copyProperties(save, reponse);
 			return reponse;
 		}
-		
-		
 		return null;
 	}
 	
