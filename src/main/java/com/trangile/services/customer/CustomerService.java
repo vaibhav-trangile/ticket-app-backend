@@ -11,7 +11,7 @@ public interface CustomerService {
 	
 	List<CustomerResponse> getCustomer(String name);
 
-	List<CustomerResponse> getAllCustomer();
+	List<CustomerResponse> getAllCustomer(String status);
 
 	List<String> getAllCustomerNames();
 	

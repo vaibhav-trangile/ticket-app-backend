@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trangile.services.customer.CustomerService;
@@ -44,18 +45,20 @@ public class CustomerController {
 	
 	
 	@GetMapping(value = "/customers")
-	public ResponseEntity<ApiResponse<Object>> createCustomer() {
+	public ResponseEntity<ApiResponse<Object>> getAllCustomer(@RequestParam(name = "status", required = false) String statusValue) {
+		System.out.println("With Get Mapping createCustomer() with status:: " + statusValue);
 		ApiResponse<Object> api = new ApiResponse<>();
 		api.setCode(HttpStatus.OK.value());
 		api.setSuccess(true);
 		api.setMessage("Customer retrieved successfully.");
 		api.setTime(LocalDateTime.now());
-		api.setData(customerService.getAllCustomer());
+		api.setData(customerService.getAllCustomer(statusValue));
 		return new ResponseEntity<>(api, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/customers/{id}")
 	public ResponseEntity<ApiResponse<Object>> getCustomerFromId(@PathVariable(value = "id") Long custId) {
+		System.out.println("With Get Mapping getCustomerFromId().");
 		ApiResponse<Object> api = new ApiResponse<>();
 		api.setData(customerService.getCustomer(custId));
 		return new ResponseEntity<>(api, HttpStatus.OK);

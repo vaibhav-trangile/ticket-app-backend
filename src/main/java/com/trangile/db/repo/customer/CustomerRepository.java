@@ -18,6 +18,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Serializable
 	@Query(value = "SELECT c.customerName from Customer c")
 	List<String> findAllNames();
 	
-	
+	@Query("SELECT c FROM Customer c WHERE c.isActive = :active AND c.isDeleted = :deleted")
+	List<Customer> getByIsActiveAndIsDeleted(char active, char deleted);	
 
 }

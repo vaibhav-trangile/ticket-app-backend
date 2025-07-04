@@ -1,5 +1,6 @@
 package com.trangile.services.customer.impls;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -73,9 +74,14 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public List<CustomerResponse> getAllCustomer() {
-		List<Customer> allCustomers = repo.findAll();
-		return  allCustomers.stream().map(c -> {
+	public List<CustomerResponse> getAllCustomer(String status) {
+		List<Customer> customers = new ArrayList<>();
+		if ("inactive".equalsIgnoreCase(status)) {
+			customers = repo.getByIsActiveAndIsDeleted('N', 'Y');
+		} else {
+			customers = repo.getByIsActiveAndIsDeleted('Y', 'N');
+		}
+		return  customers.stream().map(c -> {
 			CustomerResponse response = new CustomerResponse();
 			response.setCustomerId(c.getCustomerId());
 			response.setCustomerName(c.getCustomerName());
